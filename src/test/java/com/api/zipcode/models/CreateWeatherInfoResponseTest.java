@@ -1,7 +1,6 @@
 package com.api.zipcode.models;
 
 import com.api.zipcode.models.dto.DailyTemperatureDTO;
-import com.api.zipcode.models.dto.MaxMinTemperatureDTO;
 import com.api.zipcode.models.dto.WeatherInfoDTO;
 import com.api.zipcode.services.response.WeatherInfoResponse;
 import org.junit.jupiter.api.Test;

@@ -2,7 +2,6 @@ package com.api.zipcode.services.impl;
 
 import com.api.zipcode.configurations.EnvironmentConstants;
 import com.api.zipcode.exceptions.GetWeatherInformationException;
-import com.api.zipcode.services.response.AddressResponse;
 import com.api.zipcode.services.response.WeatherInfoResponse;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
@@ -15,7 +14,8 @@ import org.springframework.web.client.RestTemplate;
 
 import java.util.List;
 
-import static com.api.zipcode.services.response.WeatherInfoResponse.*;
+import static com.api.zipcode.services.response.WeatherInfoResponse.Current;
+import static com.api.zipcode.services.response.WeatherInfoResponse.Daily;
 import static org.junit.jupiter.api.Assertions.assertEquals;
 import static org.junit.jupiter.api.Assertions.assertThrows;
 import static org.mockito.ArgumentMatchers.any;
