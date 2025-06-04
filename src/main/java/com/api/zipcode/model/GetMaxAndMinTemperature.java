@@ -32,7 +32,9 @@ public class GetMaxAndMinTemperature {
     }
 
     private DailyTemperatureDTO getFirstTemperature(WeatherInfoDTO weatherInfoDTO) {
-        return weatherInfoDTO.getDailiesTemperatures().get(0);
+        return weatherInfoDTO.getDailiesTemperatures().stream()
+                .findFirst()
+                .orElse(null);
     }
 
     private MaxMinTemperature createMaxTemperature(DailyTemperatureDTO dto) {
