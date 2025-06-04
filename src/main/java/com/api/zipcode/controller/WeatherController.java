@@ -1,8 +1,8 @@
 package com.api.zipcode.controller;
 
+import com.api.zipcode.exceptions.GetWeatherInformationException;
 import com.api.zipcode.models.CreateWeatherInfoResponse;
 import com.api.zipcode.models.GetMaxAndMinTemperature;
-import com.api.zipcode.models.dto.WeatherInfoDTO;
 import com.api.zipcode.services.GetAddressInfoService;
 import com.api.zipcode.services.GetWeatherInfoService;
 import lombok.RequiredArgsConstructor;
@@ -23,13 +23,18 @@ public class WeatherController {
     private final GetMaxAndMinTemperature getMaxAndMinTemperature;
 
     @GetMapping
-    public ResponseEntity<WeatherInfoDTO> getWeatherInformation(@RequestParam(value = "zipCode") String zipCode) {
+    public ResponseEntity<?> getWeatherInformation(@RequestParam(value = "zipCode") String zipCode) {
 
-        var addressResponse = getAddressInfoService.getAddressResponse(zipCode);
-        var weatherInfoResponse = getWeatherInfoService.getWeatherResponse(addressResponse.lat(), addressResponse.lon());
-        var weatherInfoDTO = mapper.createWeatherInfoResponse(weatherInfoResponse);
-        var weatherInfoDTOWithMaxAndMinTemperatures = getMaxAndMinTemperature.getMaxAndMinTemperature(weatherInfoDTO);
+        try {
+            var addressResponse = getAddressInfoService.getAddressResponse(zipCode);
+            var weatherInfoResponse = getWeatherInfoService.getWeatherResponse(addressResponse.lat(), addressResponse.lon());
+            var weatherInfoDTO = mapper.createWeatherInfoResponse(weatherInfoResponse);
+            var weatherInfoDTOWithMaxAndMinTemperatures = getMaxAndMinTemperature.getMaxAndMinTemperature(weatherInfoDTO);
 
-        return ResponseEntity.ok(weatherInfoDTOWithMaxAndMinTemperatures);
+            return ResponseEntity.ok(weatherInfoDTOWithMaxAndMinTemperatures);
+        } catch (GetWeatherInformationException exception) {
+            return ResponseEntity.unprocessableEntity()
+                    .body(exception.getMessage());
+        }
     }
 }

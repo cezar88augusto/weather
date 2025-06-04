@@ -17,6 +17,11 @@ paths:
             application/json:
               schema:
                 $ref: '#/components/schemas/WeatherInfoDTO'
+        422:
+          description: Error retrieving address information from ZIP code. / Error retrieving weather information.
+        500:
+          description: Internal Server Error.
+
 components:
   schemas:
     WeatherInfoDTO:
@@ -62,6 +67,7 @@ components:
           type: number
           format: double
           example: 14.6
+
   parameters:
     ZipCode:
       name: zipCode
