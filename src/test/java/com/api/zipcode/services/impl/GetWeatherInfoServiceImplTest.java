@@ -15,6 +15,7 @@ import org.springframework.web.client.RestTemplate;
 
 import java.util.List;
 
+import static com.api.zipcode.services.response.WeatherInfoResponse.*;
 import static org.junit.jupiter.api.Assertions.assertEquals;
 import static org.junit.jupiter.api.Assertions.assertThrows;
 import static org.mockito.ArgumentMatchers.any;
@@ -68,11 +69,11 @@ class GetWeatherInfoServiceImplTest {
         return new WeatherInfoResponse(LATITUDE, LONGITUDE, mockCurrent(), mockDaily());
     }
 
-    private WeatherInfoResponse.Current mockCurrent() {
-        return new WeatherInfoResponse.Current(TIME, TEMPERATURE);
+    private Current mockCurrent() {
+        return new Current(TIME, TEMPERATURE);
     }
 
-    private WeatherInfoResponse.Daily mockDaily() {
-        return new WeatherInfoResponse.Daily(List.of(), List.of(), List.of());
+    private Daily mockDaily() {
+        return new Daily(List.of(), List.of(), List.of());
     }
 }
