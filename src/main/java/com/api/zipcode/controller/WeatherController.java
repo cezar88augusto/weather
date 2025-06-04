@@ -2,6 +2,7 @@ package com.api.zipcode.controller;
 
 import com.api.zipcode.controller.dto.WatherInfoDTO;
 import com.api.zipcode.service.GetAddressInfoService;
+import com.api.zipcode.service.GetWeatherInfoService;
 import io.swagger.v3.oas.annotations.Operation;
 import io.swagger.v3.oas.annotations.responses.ApiResponse;
 import io.swagger.v3.oas.annotations.responses.ApiResponses;
@@ -18,6 +19,7 @@ import org.springframework.web.bind.annotation.RestController;
 public class WeatherController {
 
     private final GetAddressInfoService getAddressInfoService;
+    private final GetWeatherInfoService getWeatherInfoService;
 
     @GetMapping
     @Operation(description = "Realiza pesquisa de dados climáticos a partir do CEP.")
@@ -28,6 +30,7 @@ public class WeatherController {
             @RequestParam(value = "zipCode") String zipCode) {
 
         var addressResponse = getAddressInfoService.getAddressResponse(zipCode);
+        var weatherInfo = getWeatherInfoService.getWeatherResponse(addressResponse.lat(), addressResponse.lon());
 
         return ResponseEntity.ok(null);
     }
