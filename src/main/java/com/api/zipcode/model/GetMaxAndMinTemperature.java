@@ -1,8 +1,8 @@
 package com.api.zipcode.model;
 
-import com.api.zipcode.controller.dto.DailyTemperatureDTO;
-import com.api.zipcode.controller.dto.MaxMinTemperatureDTO;
-import com.api.zipcode.controller.dto.WeatherInfoDTO;
+import com.api.zipcode.model.dto.DailyTemperatureDTO;
+import com.api.zipcode.model.dto.MaxMinTemperatureDTO;
+import com.api.zipcode.model.dto.WeatherInfoDTO;
 import org.springframework.stereotype.Component;
 
 @Component

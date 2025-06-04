@@ -1,7 +1,7 @@
 package com.api.zipcode.service.impl;
 
-import com.api.zipcode.service.response.AddressResponse;
 import com.api.zipcode.service.GetAddressInfoService;
+import com.api.zipcode.service.response.AddressResponse;
 import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Service;
 import org.springframework.web.client.RestTemplate;
@@ -17,7 +17,7 @@ public class GetAddressInfoImpl implements GetAddressInfoService {
 
     @Override
     public AddressResponse getAddressResponse(String zipCode) {
-        String url = UriComponentsBuilder.fromHttpUrl("https://nominatim.openstreetmap.org/search")
+        var url = UriComponentsBuilder.fromHttpUrl("https://nominatim.openstreetmap.org/search")
                 .queryParam("postalcode", zipCode)
                 .queryParam("polygon_geojson", "1")
                 .queryParam("format", "jsonv2")

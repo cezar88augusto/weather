@@ -1,13 +1,10 @@
 package com.api.zipcode.controller;
 
-import com.api.zipcode.controller.dto.WeatherInfoDTO;
 import com.api.zipcode.model.CreateWeatherInfoResponse;
 import com.api.zipcode.model.GetMaxAndMinTemperature;
+import com.api.zipcode.model.dto.WeatherInfoDTO;
 import com.api.zipcode.service.GetAddressInfoService;
 import com.api.zipcode.service.GetWeatherInfoService;
-import io.swagger.v3.oas.annotations.Operation;
-import io.swagger.v3.oas.annotations.responses.ApiResponse;
-import io.swagger.v3.oas.annotations.responses.ApiResponses;
 import lombok.RequiredArgsConstructor;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.GetMapping;
@@ -26,11 +23,7 @@ public class WeatherController {
     private final GetMaxAndMinTemperature getMaxAndMinTemperature;
 
     @GetMapping
-    @Operation(description = "Get weather data by ZIP code.")
-    @ApiResponses({
-            @ApiResponse(responseCode = "200", description = "Success when getting weather information.")
-    })
-    public ResponseEntity<WeatherInfoDTO> getWeatherInfo(@RequestParam(value = "zipCode") String zipCode) {
+    public ResponseEntity<WeatherInfoDTO> getWeatherInformation(@RequestParam(value = "zipCode") String zipCode) {
 
         var addressResponse = getAddressInfoService.getAddressResponse(zipCode);
         var weatherInfoResponse = getWeatherInfoService.getWeatherResponse(addressResponse.lat(), addressResponse.lon());

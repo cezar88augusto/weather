@@ -1,4 +1,4 @@
-package com.api.zipcode.controller.dto;
+package com.api.zipcode.model.dto;
 
 import lombok.Builder;
 
