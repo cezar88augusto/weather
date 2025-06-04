@@ -4,6 +4,7 @@ public class AppConstants {
 
     public static class ErrorsConstants {
         public static final String ERROR_GET_ADDRESS = "Error retrieving address information from ZIP code: ";
+        public static final String ERROR_GET_ADDRESS_NOT_FOUND = "Address not found for this zip code: ";
         public static final String ERROR_GET_WEATHER_INFO = "Error retrieving weather information: ";
     }
 

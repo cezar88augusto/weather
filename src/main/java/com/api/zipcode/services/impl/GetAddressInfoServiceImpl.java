@@ -15,11 +15,12 @@ import java.util.Arrays;
 import java.util.Optional;
 
 import static com.api.zipcode.constants.AppConstants.ErrorsConstants.ERROR_GET_ADDRESS;
+import static com.api.zipcode.constants.AppConstants.ErrorsConstants.ERROR_GET_ADDRESS_NOT_FOUND;
 import static com.api.zipcode.constants.AppConstants.QueriesConstants.*;
 
 @Service
 @RequiredArgsConstructor
-public class GetAddressInfoImpl implements GetAddressInfoService {
+public class GetAddressInfoServiceImpl implements GetAddressInfoService {
 
     private final RestTemplate restTemplate;
     private final EnvironmentConstants environment;
@@ -39,7 +40,7 @@ public class GetAddressInfoImpl implements GetAddressInfoService {
 
             return Optional.ofNullable(response)
                     .flatMap(addressResponses -> Arrays.stream(addressResponses).findFirst())
-                    .orElse(null);
+                    .orElseThrow(() -> new GetWeatherInformationException(ERROR_GET_ADDRESS_NOT_FOUND + zipCode));
 
         } catch (HttpClientErrorException exception) {
             throw new GetWeatherInformationException(ERROR_GET_ADDRESS + exception.getMessage());

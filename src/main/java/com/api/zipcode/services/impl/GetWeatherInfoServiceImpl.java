@@ -16,7 +16,7 @@ import static com.api.zipcode.constants.AppConstants.QueriesConstants.*;
 
 @Service
 @RequiredArgsConstructor
-public class GetWeatherInfoImpl implements GetWeatherInfoService {
+public class GetWeatherInfoServiceImpl implements GetWeatherInfoService {
 
     private final RestTemplate restTemplate;
     private final EnvironmentConstants environment;
