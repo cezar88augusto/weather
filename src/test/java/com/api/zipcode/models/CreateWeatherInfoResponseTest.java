@@ -5,6 +5,9 @@ import com.api.zipcode.models.dto.MaxMinTemperatureDTO;
 import com.api.zipcode.models.dto.WeatherInfoDTO;
 import com.api.zipcode.services.response.WeatherInfoResponse;
 import org.junit.jupiter.api.Test;
+import org.junit.jupiter.api.extension.ExtendWith;
+import org.mockito.InjectMocks;
+import org.mockito.junit.jupiter.MockitoExtension;
 
 import java.util.List;
 
@@ -12,6 +15,7 @@ import static com.api.zipcode.services.response.WeatherInfoResponse.Current;
 import static com.api.zipcode.services.response.WeatherInfoResponse.Daily;
 import static org.junit.jupiter.api.Assertions.assertEquals;
 
+@ExtendWith(MockitoExtension.class)
 class CreateWeatherInfoResponseTest {
 
     private static final double CURRENT_TEMPERATURE = 22.5;
@@ -29,7 +33,8 @@ class CreateWeatherInfoResponseTest {
     private static final List<Double> MAX_TEMPS = List.of(MAX_TEMP_DATE_1, MAX_TEMP_DATE_2);
     private static final List<Double> MIN_TEMPS = List.of(MIN_TEMP_DATE_1, MIN_TEMP_DATE_2);
 
-    private final CreateWeatherInfoResponse createWeatherInfoResponse = new CreateWeatherInfoResponse();
+    @InjectMocks
+    private CreateWeatherInfoResponse createWeatherInfoResponse;
 
     @Test
     void createWeatherInfoResponse_successWhenCreatingWeatherInfoResponse_returnsWeatherInfoDTO() {
