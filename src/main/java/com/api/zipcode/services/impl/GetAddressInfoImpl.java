@@ -1,6 +1,7 @@
 package com.api.zipcode.services.impl;
 
 import com.api.zipcode.configurations.EnvironmentConstants;
+import com.api.zipcode.exceptions.GetAddressInfoException;
 import com.api.zipcode.services.GetAddressInfoService;
 import com.api.zipcode.services.response.AddressResponse;
 import lombok.RequiredArgsConstructor;
@@ -9,6 +10,7 @@ import org.springframework.web.client.RestTemplate;
 import org.springframework.web.util.UriComponentsBuilder;
 
 import java.util.Arrays;
+import java.util.Optional;
 
 @Service
 @RequiredArgsConstructor
@@ -19,16 +21,22 @@ public class GetAddressInfoImpl implements GetAddressInfoService {
 
     @Override
     public AddressResponse getAddressResponse(String zipCode) {
-        var URI = UriComponentsBuilder.fromUriString(environment.getOpenStreetUrl())
-                .queryParam("postalcode", zipCode)
-                .queryParam("polygon_geojson", "1")
-                .queryParam("format", "jsonv2")
-                .build()
-                .toUri();
+        try {
+            var URI = UriComponentsBuilder.fromUriString(environment.getOpenStreetUrl())
+                    .queryParam("postalcode", zipCode)
+                    .queryParam("polygon_geojson", "1")
+                    .queryParam("format", "jsonv2")
+                    .build()
+                    .toUri();
 
-        var response = restTemplate.getForObject(URI, AddressResponse[].class);
+            var response = restTemplate.getForObject(URI, AddressResponse[].class);
 
-        assert response != null;
-        return Arrays.stream(response).findFirst().orElse(null);
+            return Optional.ofNullable(response)
+                    .flatMap(addressResponses -> Arrays.stream(addressResponses).findFirst())
+                    .orElse(null);
+
+        } catch (Exception exception) {
+            throw new GetAddressInfoException("Erro ao obter informções a partir do CEP: " + exception.getMessage());
+        }
     }
 }

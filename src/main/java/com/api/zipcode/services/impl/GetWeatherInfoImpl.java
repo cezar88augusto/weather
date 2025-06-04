@@ -1,6 +1,7 @@
 package com.api.zipcode.services.impl;
 
 import com.api.zipcode.configurations.EnvironmentConstants;
+import com.api.zipcode.exceptions.GetWeatherInfoException;
 import com.api.zipcode.services.GetWeatherInfoService;
 import com.api.zipcode.services.response.WeatherInfoResponse;
 import lombok.RequiredArgsConstructor;
@@ -17,15 +18,19 @@ public class GetWeatherInfoImpl implements GetWeatherInfoService {
 
     @Override
     public WeatherInfoResponse getWeatherResponse(String latitude, String longitude) {
-        var URI = UriComponentsBuilder.fromUriString(environment.getOpenMeteoUrl())
-                .queryParam("latitude", latitude)
-                .queryParam("longitude", longitude)
-                .queryParam("current", "temperature_2m")
-                .queryParam("daily", "temperature_2m_max,temperature_2m_min")
-                .queryParam("timezone", "GMT")
-                .build()
-                .toUri();
+        try {
+            var URI = UriComponentsBuilder.fromUriString(environment.getOpenMeteoUrl())
+                    .queryParam("latitude", latitude)
+                    .queryParam("longitude", longitude)
+                    .queryParam("current", "temperature_2m")
+                    .queryParam("daily", "temperature_2m_max,temperature_2m_min")
+                    .queryParam("timezone", "GMT")
+                    .build()
+                    .toUri();
 
-        return restTemplate.getForObject(URI, WeatherInfoResponse.class);
+            return restTemplate.getForObject(URI, WeatherInfoResponse.class);
+        } catch (Exception exception) {
+            throw new GetWeatherInfoException("Erro ao obter informções climática: " + exception.getMessage());
+        }
     }
 }
