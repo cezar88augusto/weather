@@ -12,6 +12,9 @@ import org.springframework.web.util.UriComponentsBuilder;
 import java.util.Arrays;
 import java.util.Optional;
 
+import static com.api.zipcode.constants.AppConstants.ErrorsConstants.ERROR_GET_ADDRESS;
+import static com.api.zipcode.constants.AppConstants.QueriesConstants.*;
+
 @Service
 @RequiredArgsConstructor
 public class GetAddressInfoImpl implements GetAddressInfoService {
@@ -23,9 +26,9 @@ public class GetAddressInfoImpl implements GetAddressInfoService {
     public AddressResponse getAddressResponse(String zipCode) {
         try {
             var URI = UriComponentsBuilder.fromUriString(environment.getOpenStreetUrl())
-                    .queryParam("postalcode", zipCode)
-                    .queryParam("polygon_geojson", "1")
-                    .queryParam("format", "jsonv2")
+                    .queryParam(POSTAL_CODE, zipCode)
+                    .queryParam(POLYGON_GEOJSON, "1")
+                    .queryParam(FORMAT, "jsonv2")
                     .build()
                     .toUri();
 
@@ -36,7 +39,7 @@ public class GetAddressInfoImpl implements GetAddressInfoService {
                     .orElse(null);
 
         } catch (Exception exception) {
-            throw new GetAddressInfoException("Erro ao obter informções a partir do CEP: " + exception.getMessage());
+            throw new GetAddressInfoException(ERROR_GET_ADDRESS + exception.getMessage());
         }
     }
 }

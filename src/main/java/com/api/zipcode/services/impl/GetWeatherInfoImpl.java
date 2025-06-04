@@ -9,6 +9,9 @@ import org.springframework.stereotype.Service;
 import org.springframework.web.client.RestTemplate;
 import org.springframework.web.util.UriComponentsBuilder;
 
+import static com.api.zipcode.constants.AppConstants.ErrorsConstants.ERROR_GET_WEATHER_INFO;
+import static com.api.zipcode.constants.AppConstants.QueriesConstants.*;
+
 @Service
 @RequiredArgsConstructor
 public class GetWeatherInfoImpl implements GetWeatherInfoService {
@@ -20,17 +23,17 @@ public class GetWeatherInfoImpl implements GetWeatherInfoService {
     public WeatherInfoResponse getWeatherResponse(String latitude, String longitude) {
         try {
             var URI = UriComponentsBuilder.fromUriString(environment.getOpenMeteoUrl())
-                    .queryParam("latitude", latitude)
-                    .queryParam("longitude", longitude)
-                    .queryParam("current", "temperature_2m")
-                    .queryParam("daily", "temperature_2m_max,temperature_2m_min")
-                    .queryParam("timezone", "GMT")
+                    .queryParam(LATITUDE, latitude)
+                    .queryParam(LONGITUDE, longitude)
+                    .queryParam(CURRENT, "temperature_2m")
+                    .queryParam(DAILY, "temperature_2m_max,temperature_2m_min")
+                    .queryParam(TIMEZONE, "GMT")
                     .build()
                     .toUri();
 
             return restTemplate.getForObject(URI, WeatherInfoResponse.class);
         } catch (Exception exception) {
-            throw new GetWeatherInfoException("Erro ao obter informções climática: " + exception.getMessage());
+            throw new GetWeatherInfoException(ERROR_GET_WEATHER_INFO + exception.getMessage());
         }
     }
 }
