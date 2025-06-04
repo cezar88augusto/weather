@@ -2,7 +2,7 @@ package com.api.zipcode.model.mapper;
 
 import com.api.zipcode.controller.dto.DailyTemperatureDTO;
 import com.api.zipcode.controller.dto.WeatherInfoDTO;
-import com.api.zipcode.controller.response.WeatherInfoResponse;
+import com.api.zipcode.service.response.WeatherInfoResponse;
 import org.mapstruct.AfterMapping;
 import org.mapstruct.Mapper;
 import org.mapstruct.Mapping;

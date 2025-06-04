@@ -26,9 +26,9 @@ public class WeatherController {
     private final GetMaxAndMinTemperature getMaxAndMinTemperature;
 
     @GetMapping
-    @Operation(description = "Realiza pesquisa de dados climáticos a partir do CEP.")
+    @Operation(description = "Get weather data by ZIP code.")
     @ApiResponses({
-            @ApiResponse(responseCode = "200", description = "Sucesso.")
+            @ApiResponse(responseCode = "200", description = "Success when getting weather information.")
     })
     public ResponseEntity<WeatherInfoDTO> getWeatherInfo(@RequestParam(value = "zipCode") String zipCode) {
 

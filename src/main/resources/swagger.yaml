@@ -1,0 +1,71 @@
+openapi: 3.0.1
+info:
+  title: Weather API
+  description: Retrieves weather information using the ZIP code.
+  version: 1.0.0
+paths:
+  /weather/{zipcode}:
+    get:
+      summary: Get weather data by ZIP code.
+      parameters:
+        - $ref: '#/components/parameters/ZipCode'
+      responses:
+        200:
+          description: Success when getting weather information.
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/WeatherInfoDTO'
+components:
+  schemas:
+    WeatherInfoDTO:
+      type: object
+      properties:
+        currentTemperature:
+          type: number
+          format: double
+          example: 16.2
+        maxTemperature:
+          $ref: '#/components/schemas/MaxMinTemperature'
+        minTemperature:
+          $ref: '#/components/schemas/MaxMinTemperature'
+        dailiesTemperatures:
+          type: array
+          items:
+            $ref: '#/components/schemas/DailyTemperatureDTO'
+
+    MaxMinTemperature:
+      type: object
+      properties:
+        date:
+          type: string
+          format: date
+          example: 2025-06-06
+        temperature:
+          type: number
+          format: double
+          example: 26.8
+
+    DailyTemperatureDTO:
+      type: object
+      properties:
+        date:
+          type: string
+          format: date
+          example: 2025-06-04
+        maxTemperature:
+          type: number
+          format: double
+          example: 26.0
+        minTemperature:
+          type: number
+          format: double
+          example: 14.6
+  parameters:
+    ZipCode:
+      name: zipCode
+      in: path
+      required: true
+      schema:
+        type: string
+        description: ZIP code to search weather data information.

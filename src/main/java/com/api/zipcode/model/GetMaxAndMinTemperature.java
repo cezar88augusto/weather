@@ -1,7 +1,7 @@
 package com.api.zipcode.model;
 
 import com.api.zipcode.controller.dto.DailyTemperatureDTO;
-import com.api.zipcode.controller.dto.MaxMinTemperature;
+import com.api.zipcode.controller.dto.MaxMinTemperatureDTO;
 import com.api.zipcode.controller.dto.WeatherInfoDTO;
 import org.springframework.stereotype.Component;
 
@@ -37,15 +37,15 @@ public class GetMaxAndMinTemperature {
                 .orElse(null);
     }
 
-    private MaxMinTemperature createMaxTemperature(DailyTemperatureDTO dto) {
-        return MaxMinTemperature.builder()
+    private MaxMinTemperatureDTO createMaxTemperature(DailyTemperatureDTO dto) {
+        return MaxMinTemperatureDTO.builder()
                 .date(dto.date())
                 .temperature(dto.maxTemperature())
                 .build();
     }
 
-    private MaxMinTemperature createMinTemperature(DailyTemperatureDTO dto) {
-        return MaxMinTemperature.builder()
+    private MaxMinTemperatureDTO createMinTemperature(DailyTemperatureDTO dto) {
+        return MaxMinTemperatureDTO.builder()
                 .date(dto.date())
                 .temperature(dto.minTemperature())
                 .build();

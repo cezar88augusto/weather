@@ -1,6 +1,6 @@
 package com.api.zipcode.service.impl;
 
-import com.api.zipcode.controller.response.WeatherInfoResponse;
+import com.api.zipcode.service.response.WeatherInfoResponse;
 import com.api.zipcode.service.GetWeatherInfoService;
 import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Service;

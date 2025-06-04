@@ -5,7 +5,7 @@ import lombok.Data;
 
 @Data
 @Builder
-public class MaxMinTemperature {
+public class MaxMinTemperatureDTO {
 
     private String date;
     private Double temperature;

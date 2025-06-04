@@ -1,4 +1,4 @@
-package com.api.zipcode.controller.response;
+package com.api.zipcode.service.response;
 
 import java.util.List;
 

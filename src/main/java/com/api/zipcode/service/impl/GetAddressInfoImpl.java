@@ -1,6 +1,6 @@
 package com.api.zipcode.service.impl;
 
-import com.api.zipcode.controller.response.AddressResponse;
+import com.api.zipcode.service.response.AddressResponse;
 import com.api.zipcode.service.GetAddressInfoService;
 import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Service;
