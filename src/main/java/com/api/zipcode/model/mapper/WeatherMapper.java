@@ -33,20 +33,16 @@ public interface WeatherMapper {
     }
 
     private void createDailiesTemperatures(List<String> dates, List<DailyTemperatureDTO> dailiesTemperatures, List<Double> maxTemps, List<Double> minTemps) {
-        for (int i = 0; i < dates.size(); i++) {
-            dailiesTemperatures.add(createDailyTemperature(dates, maxTemps, minTemps, i));
+        for (int index = 0; index < dates.size(); index++) {
+            dailiesTemperatures.add(createDailyTemperature(dates, maxTemps, minTemps, index));
         }
     }
 
-    private DailyTemperatureDTO createDailyTemperature(List<String> dates, List<Double> maxTemps, List<Double> minTemps, int i) {
+    private DailyTemperatureDTO createDailyTemperature(List<String> dates, List<Double> maxTemps, List<Double> minTemps, int index) {
         return DailyTemperatureDTO.builder()
-                .date(dates.get(i))
-                .maxTemperature(formatTemperature(maxTemps.get(i)))
-                .minTemperature(formatTemperature(minTemps.get(i)))
+                .date(dates.get(index))
+                .maxTemperature(maxTemps.get(index))
+                .minTemperature(minTemps.get(index))
                 .build();
-    }
-
-    private String formatTemperature(Double temperature) {
-        return String.format("%.1f°C", temperature);
     }
 }

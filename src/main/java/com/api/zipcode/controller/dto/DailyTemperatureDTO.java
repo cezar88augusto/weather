@@ -5,7 +5,7 @@ import lombok.Builder;
 @Builder
 public record DailyTemperatureDTO (
         String date,
-        String maxTemperature,
-        String minTemperature
+        Double maxTemperature,
+        Double minTemperature
 ) {
 }

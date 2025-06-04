@@ -10,5 +10,7 @@ import java.util.List;
 public class WeatherInfoDTO {
 
     private double currentTemperature;
+    private MaxMinTemperature maxTemperature;
+    private MaxMinTemperature minTemperature;
     private List<DailyTemperatureDTO> dailiesTemperatures;
 }

@@ -2,6 +2,7 @@ package com.api.zipcode.controller;
 
 import com.api.zipcode.controller.dto.WeatherInfoDTO;
 import com.api.zipcode.model.CreateWeatherInfoResponse;
+import com.api.zipcode.model.GetMaxAndMinTemperature;
 import com.api.zipcode.service.GetAddressInfoService;
 import com.api.zipcode.service.GetWeatherInfoService;
 import io.swagger.v3.oas.annotations.Operation;
@@ -22,19 +23,20 @@ public class WeatherController {
     private final GetAddressInfoService getAddressInfoService;
     private final GetWeatherInfoService getWeatherInfoService;
     private final CreateWeatherInfoResponse mapper;
+    private final GetMaxAndMinTemperature getMaxAndMinTemperature;
 
     @GetMapping
     @Operation(description = "Realiza pesquisa de dados climáticos a partir do CEP.")
     @ApiResponses({
             @ApiResponse(responseCode = "200", description = "Sucesso.")
     })
-    public ResponseEntity<WeatherInfoDTO> getWeatherInfo(
-            @RequestParam(value = "zipCode") String zipCode) {
+    public ResponseEntity<WeatherInfoDTO> getWeatherInfo(@RequestParam(value = "zipCode") String zipCode) {
 
         var addressResponse = getAddressInfoService.getAddressResponse(zipCode);
         var weatherInfoResponse = getWeatherInfoService.getWeatherResponse(addressResponse.lat(), addressResponse.lon());
         var weatherInfoDTO = mapper.createWeatherInfoResponse(weatherInfoResponse);
+        var weatherInfoDTOWithMaxAndMinTemperatures = getMaxAndMinTemperature.getMaxAndMinTemperature(weatherInfoDTO);
 
-        return ResponseEntity.ok(weatherInfoDTO);
+        return ResponseEntity.ok(weatherInfoDTOWithMaxAndMinTemperatures);
     }
 }
