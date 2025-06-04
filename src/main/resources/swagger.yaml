@@ -37,6 +37,7 @@ components:
           $ref: '#/components/schemas/MaxMinTemperature'
         dailiesTemperatures:
           type: array
+          description: List referring to the maximum and minimum temperatures for the next 7 days.
           items:
             $ref: '#/components/schemas/DailyTemperatureDTO'
 
