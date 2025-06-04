@@ -1,7 +1,8 @@
-package com.api.zipcode.service.impl;
+package com.api.zipcode.services.impl;
 
-import com.api.zipcode.service.GetWeatherInfoService;
-import com.api.zipcode.service.response.WeatherInfoResponse;
+import com.api.zipcode.configurations.EnvironmentConstants;
+import com.api.zipcode.services.GetWeatherInfoService;
+import com.api.zipcode.services.response.WeatherInfoResponse;
 import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Service;
 import org.springframework.web.client.RestTemplate;
@@ -12,17 +13,19 @@ import org.springframework.web.util.UriComponentsBuilder;
 public class GetWeatherInfoImpl implements GetWeatherInfoService {
 
     private final RestTemplate restTemplate;
+    private final EnvironmentConstants environment;
 
     @Override
     public WeatherInfoResponse getWeatherResponse(String latitude, String longitude) {
-        var url = UriComponentsBuilder.fromHttpUrl("https://api.open-meteo.com/v1/forecast")
+        var URI = UriComponentsBuilder.fromUriString(environment.getOpenMeteoUrl())
                 .queryParam("latitude", latitude)
                 .queryParam("longitude", longitude)
                 .queryParam("current", "temperature_2m")
                 .queryParam("daily", "temperature_2m_max,temperature_2m_min")
                 .queryParam("timezone", "GMT")
-                .toUriString();
+                .build()
+                .toUri();
 
-        return restTemplate.getForObject(url, WeatherInfoResponse.class);
+        return restTemplate.getForObject(URI, WeatherInfoResponse.class);
     }
 }

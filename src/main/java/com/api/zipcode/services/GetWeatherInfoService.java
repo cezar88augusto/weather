@@ -1,6 +1,6 @@
-package com.api.zipcode.service;
+package com.api.zipcode.services;
 
-import com.api.zipcode.service.response.WeatherInfoResponse;
+import com.api.zipcode.services.response.WeatherInfoResponse;
 
 public interface GetWeatherInfoService {
 

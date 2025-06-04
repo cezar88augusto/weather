@@ -1,10 +1,10 @@
 package com.api.zipcode.controller;
 
-import com.api.zipcode.model.CreateWeatherInfoResponse;
-import com.api.zipcode.model.GetMaxAndMinTemperature;
-import com.api.zipcode.model.dto.WeatherInfoDTO;
-import com.api.zipcode.service.GetAddressInfoService;
-import com.api.zipcode.service.GetWeatherInfoService;
+import com.api.zipcode.models.CreateWeatherInfoResponse;
+import com.api.zipcode.models.GetMaxAndMinTemperature;
+import com.api.zipcode.models.dto.WeatherInfoDTO;
+import com.api.zipcode.services.GetAddressInfoService;
+import com.api.zipcode.services.GetWeatherInfoService;
 import lombok.RequiredArgsConstructor;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.GetMapping;

@@ -1,8 +1,8 @@
-package com.api.zipcode.model;
+package com.api.zipcode.models;
 
-import com.api.zipcode.model.dto.WeatherInfoDTO;
-import com.api.zipcode.model.mapper.WeatherMapper;
-import com.api.zipcode.service.response.WeatherInfoResponse;
+import com.api.zipcode.models.dto.WeatherInfoDTO;
+import com.api.zipcode.models.mapper.WeatherMapper;
+import com.api.zipcode.services.response.WeatherInfoResponse;
 import org.springframework.stereotype.Component;
 
 @Component

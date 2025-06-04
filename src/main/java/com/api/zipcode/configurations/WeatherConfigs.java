@@ -1,4 +1,4 @@
-package com.api.zipcode.configuration;
+package com.api.zipcode.configurations;
 
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
