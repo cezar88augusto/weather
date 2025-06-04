@@ -5,6 +5,7 @@ import com.api.zipcode.exceptions.GetWeatherInformationException;
 import com.api.zipcode.services.GetAddressInfoService;
 import com.api.zipcode.services.response.AddressResponse;
 import lombok.RequiredArgsConstructor;
+import org.springframework.cache.annotation.Cacheable;
 import org.springframework.stereotype.Service;
 import org.springframework.web.client.HttpClientErrorException;
 import org.springframework.web.client.RestTemplate;
@@ -24,6 +25,7 @@ public class GetAddressInfoImpl implements GetAddressInfoService {
     private final EnvironmentConstants environment;
 
     @Override
+    @Cacheable(value = "addressCache", key = "#zipCode")
     public AddressResponse getAddressResponse(String zipCode) {
         try {
             var URI = UriComponentsBuilder.fromUriString(environment.getOpenStreetUrl())

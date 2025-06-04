@@ -5,6 +5,7 @@ import com.api.zipcode.exceptions.GetWeatherInformationException;
 import com.api.zipcode.services.GetWeatherInfoService;
 import com.api.zipcode.services.response.WeatherInfoResponse;
 import lombok.RequiredArgsConstructor;
+import org.springframework.cache.annotation.Cacheable;
 import org.springframework.stereotype.Service;
 import org.springframework.web.client.HttpClientErrorException;
 import org.springframework.web.client.RestTemplate;
@@ -21,6 +22,7 @@ public class GetWeatherInfoImpl implements GetWeatherInfoService {
     private final EnvironmentConstants environment;
 
     @Override
+    @Cacheable(value = "weatherCache", key = "T(java.util.Objects).hash(#latitude, #longitude)")
     public WeatherInfoResponse getWeatherResponse(String latitude, String longitude) {
         try {
             var URI = UriComponentsBuilder.fromUriString(environment.getOpenMeteoUrl())

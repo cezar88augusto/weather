@@ -3,3 +3,8 @@ env:
     value: "https://nominatim.openstreetmap.org/search"
   - name: APP_URLS_OPEN_METEO_URL
     value: "https://api.open-meteo.com/v1/forecast"
+
+spring:
+  redis:
+    host: localhost
+    port: 6379
