@@ -1,11 +1,12 @@
 package com.api.zipcode.services.impl;
 
 import com.api.zipcode.configurations.EnvironmentConstants;
-import com.api.zipcode.exceptions.GetAddressInfoException;
+import com.api.zipcode.exceptions.GetWeatherInformationException;
 import com.api.zipcode.services.GetAddressInfoService;
 import com.api.zipcode.services.response.AddressResponse;
 import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Service;
+import org.springframework.web.client.HttpClientErrorException;
 import org.springframework.web.client.RestTemplate;
 import org.springframework.web.util.UriComponentsBuilder;
 
@@ -38,8 +39,8 @@ public class GetAddressInfoImpl implements GetAddressInfoService {
                     .flatMap(addressResponses -> Arrays.stream(addressResponses).findFirst())
                     .orElse(null);
 
-        } catch (Exception exception) {
-            throw new GetAddressInfoException(ERROR_GET_ADDRESS + exception.getMessage());
+        } catch (HttpClientErrorException exception) {
+            throw new GetWeatherInformationException(ERROR_GET_ADDRESS + exception.getMessage());
         }
     }
 }

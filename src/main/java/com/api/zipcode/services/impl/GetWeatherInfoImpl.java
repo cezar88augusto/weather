@@ -1,11 +1,12 @@
 package com.api.zipcode.services.impl;
 
 import com.api.zipcode.configurations.EnvironmentConstants;
-import com.api.zipcode.exceptions.GetWeatherInfoException;
+import com.api.zipcode.exceptions.GetWeatherInformationException;
 import com.api.zipcode.services.GetWeatherInfoService;
 import com.api.zipcode.services.response.WeatherInfoResponse;
 import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Service;
+import org.springframework.web.client.HttpClientErrorException;
 import org.springframework.web.client.RestTemplate;
 import org.springframework.web.util.UriComponentsBuilder;
 
@@ -32,8 +33,8 @@ public class GetWeatherInfoImpl implements GetWeatherInfoService {
                     .toUri();
 
             return restTemplate.getForObject(URI, WeatherInfoResponse.class);
-        } catch (Exception exception) {
-            throw new GetWeatherInfoException(ERROR_GET_WEATHER_INFO + exception.getMessage());
+        } catch (HttpClientErrorException exception) {
+            throw new GetWeatherInformationException(ERROR_GET_WEATHER_INFO + exception.getMessage());
         }
     }
 }

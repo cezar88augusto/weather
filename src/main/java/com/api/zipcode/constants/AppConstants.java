@@ -9,7 +9,7 @@ public class AppConstants {
 
     public static class QueriesConstants {
         public static final String LATITUDE = "latitude";
-        public static final String LONGITUDE = "longitude";
+        public static final String LONGITUDE = "longitude ";
         public static final String CURRENT = "current";
         public static final String DAILY = "daily";
         public static final String TIMEZONE = "timezone ";
