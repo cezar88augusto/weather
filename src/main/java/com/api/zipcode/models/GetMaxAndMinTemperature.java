@@ -13,20 +13,20 @@ public class GetMaxAndMinTemperature {
             return weatherInfoDTO;
         }
 
-        var max = getFirstTemperature(weatherInfoDTO);
-        var min = getFirstTemperature(weatherInfoDTO);
+        var maxTemperature = getFirstTemperature(weatherInfoDTO);
+        var minTemperature = getFirstTemperature(weatherInfoDTO);
 
-        for (DailyTemperatureDTO dto : weatherInfoDTO.getDailiesTemperatures()) {
-            if (dto.maxTemperature() > max.maxTemperature()) {
-                max = dto;
+        for (DailyTemperatureDTO dailyTemperatureDTO : weatherInfoDTO.getDailiesTemperatures()) {
+            if (dailyTemperatureDTO.maxTemperature() > maxTemperature.maxTemperature()) {
+                maxTemperature = dailyTemperatureDTO;
             }
-            if (dto.minTemperature() < min.minTemperature()) {
-                min = dto;
+            if (dailyTemperatureDTO.minTemperature() < minTemperature.minTemperature()) {
+                minTemperature = dailyTemperatureDTO;
             }
         }
 
-        weatherInfoDTO.setMaxTemperature(createMaxTemperature(max));
-        weatherInfoDTO.setMinTemperature(createMinTemperature(min));
+        weatherInfoDTO.setMaxTemperature(createMaxTemperature(maxTemperature));
+        weatherInfoDTO.setMinTemperature(createMinTemperature(minTemperature));
 
         return weatherInfoDTO;
     }
