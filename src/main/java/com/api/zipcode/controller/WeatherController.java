@@ -32,6 +32,8 @@ public class WeatherController {
         var addressResponse = getAddressInfoService.getAddressResponse(zipCode);
         var weatherInfo = getWeatherInfoService.getWeatherResponse(addressResponse.lat(), addressResponse.lon());
 
-        return ResponseEntity.ok(null);
+        return ResponseEntity.ok(WatherInfoDTO.builder()
+                .currentTemperature(weatherInfo.current().temperature_2m())
+                .build());
     }
 }

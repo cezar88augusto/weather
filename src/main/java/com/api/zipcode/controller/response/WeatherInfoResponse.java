@@ -1,27 +1,23 @@
 package com.api.zipcode.controller.response;
 
-import lombok.Data;
-
 import java.util.List;
 
-@Data
-public class WeatherInfoResponse {
-
-    private double latitude;
-    private double longitude;
-    private Current current;
-    private Daily daily;
-
-    @Data
-    public static class Current {
-        private String time;
-        private double temperature_2m;
+public record WeatherInfoResponse(
+        double latitude,
+        double longitude,
+        Current current,
+        Daily daily
+) {
+    public record Current(
+            String time,
+            double temperature_2m
+    ) {
     }
 
-    @Data
-    public static class Daily {
-        private List<String> time;
-        private List<Double> temperature_2m_max;
-        private List<Double> temperature_2m_min;
+    public record Daily(
+            List<String> time,
+            List<Double> temperature_2m_max,
+            List<Double> temperature_2m_min
+    ) {
     }
 }
