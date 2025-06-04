@@ -25,20 +25,27 @@ public class GetMaxAndMinTemperature {
             }
         }
 
-        weatherInfoDTO.setMaxTemperature(createTemperature(max));
-        weatherInfoDTO.setMinTemperature(createTemperature(min));
+        weatherInfoDTO.setMaxTemperature(createMaxTemperature(max));
+        weatherInfoDTO.setMinTemperature(createMinTemperature(min));
 
         return weatherInfoDTO;
     }
 
     private DailyTemperatureDTO getFirstTemperature(WeatherInfoDTO weatherInfoDTO) {
-        return weatherInfoDTO.getDailiesTemperatures().stream().findFirst().orElse(null);
+        return weatherInfoDTO.getDailiesTemperatures().get(0);
     }
 
-    private MaxMinTemperature createTemperature(DailyTemperatureDTO max) {
+    private MaxMinTemperature createMaxTemperature(DailyTemperatureDTO dto) {
         return MaxMinTemperature.builder()
-                .date(max.date())
-                .temperature(max.maxTemperature())
+                .date(dto.date())
+                .temperature(dto.maxTemperature())
+                .build();
+    }
+
+    private MaxMinTemperature createMinTemperature(DailyTemperatureDTO dto) {
+        return MaxMinTemperature.builder()
+                .date(dto.date())
+                .temperature(dto.minTemperature())
                 .build();
     }
 }
