@@ -1,7 +1,7 @@
 package com.api.zipcode.controller;
 
 import com.api.zipcode.controller.dto.WeatherInfoDTO;
-import com.api.zipcode.model.WeatherMapper;
+import com.api.zipcode.model.CreateWeatherInfoResponse;
 import com.api.zipcode.service.GetAddressInfoService;
 import com.api.zipcode.service.GetWeatherInfoService;
 import io.swagger.v3.oas.annotations.Operation;
@@ -21,6 +21,7 @@ public class WeatherController {
 
     private final GetAddressInfoService getAddressInfoService;
     private final GetWeatherInfoService getWeatherInfoService;
+    private final CreateWeatherInfoResponse mapper;
 
     @GetMapping
     @Operation(description = "Realiza pesquisa de dados climáticos a partir do CEP.")
@@ -31,8 +32,9 @@ public class WeatherController {
             @RequestParam(value = "zipCode") String zipCode) {
 
         var addressResponse = getAddressInfoService.getAddressResponse(zipCode);
-        var weatherInfo = getWeatherInfoService.getWeatherResponse(addressResponse.lat(), addressResponse.lon());
+        var weatherInfoResponse = getWeatherInfoService.getWeatherResponse(addressResponse.lat(), addressResponse.lon());
+        var weatherInfoDTO = mapper.createWeatherInfoResponse(weatherInfoResponse);
 
-        return ResponseEntity.ok(WeatherMapper.INSTANCE.toWeatherInfoDTO(weatherInfo));
+        return ResponseEntity.ok(weatherInfoDTO);
     }
 }
